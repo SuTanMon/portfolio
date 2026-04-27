@@ -2,71 +2,87 @@
    JOHN KIRBY SOLIVEN — main.js
    ============================= */
 
-// ── CUSTOM CURSOR (SAFE VERSION) ──────────────────
-const dot  = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
+// ── CUSTOM CURSOR (PRODUCTION SAFE) ──
+document.addEventListener("DOMContentLoaded", () => {
 
-let mouseX = 0, mouseY = 0;
-let ringX  = 0, ringY  = 0;
-let cursorActive   = false;
-let animationStarted = false;
+  const dot  = document.getElementById("cursorDot");
+  const ring = document.getElementById("cursorRing");
 
-function activateCursor() {
-  if (cursorActive || !dot || !ring) return;
-  cursorActive = true;
-  document.body.classList.add('has-pointer');
-  if (!animationStarted) {
-    animationStarted = true;
-    startRingAnimation();
+  if (!dot || !ring) return;
+
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+  let active = false;
+
+  function activateCursor() {
+    if (active) return;
+    active = true;
+    document.body.classList.add("has-pointer");
+    animateRing();
   }
-}
 
-/* Mouse tracking */
-document.addEventListener('mousemove', (e) => {
-  activateCursor();
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  if (dot) {
-    dot.style.left = mouseX + 'px';
-    dot.style.top  = mouseY + 'px';
-  }
-});
+  document.addEventListener("mousemove", (e) => {
+    activateCursor();
 
-/* Touch fallback */
-document.addEventListener('touchstart', () => {
-  cursorActive = false;
-  document.body.classList.remove('has-pointer');
-}, { passive: true });
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-/* Smooth ring follow */
-function startRingAnimation() {
-  function loop() {
-    if (cursorActive && ring) {
-      ringX += (mouseX - ringX) * 0.14;
-      ringY += (mouseY - ringY) * 0.14;
-      ring.style.left = ringX + 'px';
-      ring.style.top  = ringY + 'px';
+    dot.style.left = mouseX + "px";
+    dot.style.top  = mouseY + "px";
+  });
+
+  document.addEventListener("touchstart", () => {
+    active = false;
+    document.body.classList.remove("has-pointer");
+  }, { passive: true });
+
+  function animateRing() {
+    function loop() {
+      if (active) {
+        ringX += (mouseX - ringX) * 0.14;
+        ringY += (mouseY - ringY) * 0.14;
+
+        ring.style.left = ringX + "px";
+        ring.style.top  = ringY + "px";
+      }
+
+      requestAnimationFrame(loop);
     }
-    requestAnimationFrame(loop);
+    loop();
   }
-  loop();
-}
 
-/* Hover effects */
-document.addEventListener('mouseover', (e) => {
-  if (!cursorActive) return;
-  const target = e.target.closest('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send');
-  if (!target) return;
-  if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(2.5)'; dot.style.opacity = '0.6'; }
-  if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1.5)'; ring.style.borderColor = 'rgba(125,211,252,0.8)'; }
-});
+  document.addEventListener("mouseover", (e) => {
+    if (!active) return;
 
-document.addEventListener('mouseout', (e) => {
-  if (!cursorActive) return;
-  const target = e.target.closest('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send');
-  if (!target) return;
-  if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(1)'; dot.style.opacity = '1'; }
-  if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'rgba(125,211,252,0.5)'; }
+    const target = e.target.closest(
+      "a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send"
+    );
+
+    if (!target) return;
+
+    dot.style.transform = "translate(-50%, -50%) scale(2.5)";
+    dot.style.opacity = "0.6";
+
+    ring.style.transform = "translate(-50%, -50%) scale(1.5)";
+    ring.style.borderColor = "rgba(125,211,252,0.8)";
+  });
+
+  document.addEventListener("mouseout", (e) => {
+    if (!active) return;
+
+    const target = e.target.closest(
+      "a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send"
+    );
+
+    if (!target) return;
+
+    dot.style.transform = "translate(-50%, -50%) scale(1)";
+    dot.style.opacity = "1";
+
+    ring.style.transform = "translate(-50%, -50%) scale(1)";
+    ring.style.borderColor = "rgba(125,211,252,0.5)";
+  });
+
 });
 
 // ── NAVBAR SCROLL ──────────────────────────────────

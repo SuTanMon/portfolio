@@ -46,16 +46,14 @@ body {
   color: var(--light-text);
   line-height: 1.7;
   overflow-x: hidden;
+  cursor: auto; /* always show system cursor by default */
+}
+  /* Only hide system cursor AFTER JS confirms pointer device */
+  body.has-pointer {
   cursor: none;
 }
 
 /* ============ CUSTOM CURSOR ============ */
-.cursor {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: screen;
-}
 .cursor-dot {
   width: 8px; height: 8px;
   background: var(--accent);
@@ -78,9 +76,22 @@ body {
   pointer-events: none;
   opacity: 0; /* hidden until JS confirms pointer device */
 }
-/* Show custom cursor on pointer devices */
+/* Custom dot/ring are purely additive — system cursor is always visible.
+   JS reveals them on first mousemove, so they never appear on touch devices. */
 body.has-pointer .cursor-dot,
 body.has-pointer .cursor-ring { opacity: 1; }
+
+/* Hide the system cursor only on pointer devices once custom cursor is active */
+body.has-pointer,
+body.has-pointer a,
+body.has-pointer button,
+body.has-pointer .btn,
+body.has-pointer nav a,
+body.has-pointer .footer-links a,
+body.has-pointer .cert-link,
+body.has-pointer .cert-card,
+body.has-pointer .card,
+body.has-pointer .tech-card { cursor: none; }
 
 /* ============ NOISE OVERLAY ============ */
 body::before {
@@ -135,7 +146,7 @@ p  { color: #94a3b8; }
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
-  cursor: none;
+  cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
   position: relative;
@@ -223,7 +234,7 @@ nav a {
   padding: 7px 16px;
   border-radius: 50px;
   transition: var(--transition);
-  cursor: none;
+  cursor: pointer;
 }
 nav a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
 nav a.active { color: var(--white); background: rgba(125,211,252,0.1); color: var(--accent); border: 1px solid rgba(125,211,252,0.15); }
@@ -594,7 +605,7 @@ footer::before {
 }
 .footer-inner p { font-size: 0.85rem; color: var(--muted); }
 .footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: var(--transition); cursor: none; }
+.footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: var(--transition); cursor: pointer; }
 .footer-links a:hover { color: var(--accent); }
 
 /* ============ PAGE HERO ============ */
@@ -830,7 +841,7 @@ footer::before {
   overflow: hidden;
   transition: var(--transition);
   position: relative;
-  cursor: none;
+  cursor: default;
 }
 .cert-card::before {
   content: '';
@@ -952,7 +963,7 @@ footer::before {
   background: rgba(125,211,252,0.07);
   border: 1px solid rgba(125,211,252,0.15);
   transition: var(--transition);
-  cursor: none;
+  cursor: pointer;
 }
 .cert-link:hover {
   background: rgba(125,211,252,0.14);
