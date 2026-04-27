@@ -49,42 +49,66 @@ body {
   cursor: auto;
 }
 
-/* ============ CUSTOM CURSOR ============ */
+/* ============ CUSTOM CURSOR (SAFE FIXED) ============ */
+
 .cursor {
   position: fixed;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: screen;
 }
+
+/* hidden by default */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* dot */
 .cursor-dot {
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   background: var(--accent);
   border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, opacity 0.2s, transform 0.15s;
   z-index: 9999;
-  pointer-events: none;
-  opacity: 0; /* hidden until JS confirms pointer device */
+  transition: width 0.2s, height 0.2s, opacity 0.2s, transform 0.15s;
 }
+
+/* ring */
 .cursor-ring {
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
   border: 1.5px solid rgba(125,211,252,0.5);
   border-radius: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  transition: all 0.12s ease;
   z-index: 9998;
-  pointer-events: none;
-  opacity: 0; /* hidden until JS confirms pointer device */
+  transition: all 0.12s ease;
 }
-/* JS adds .has-pointer to <body> on first mousemove */
-body.has-pointer { cursor: none; }
+
+/* only activate when JS confirms */
+body.has-pointer {
+  cursor: none;
+}
+
 body.has-pointer .cursor-dot,
-body.has-pointer .cursor-ring { opacity: 1; }
-body.has-pointer a,
-body.has-pointer button,
-body.has-pointer [role="button"] { cursor: none; }
+body.has-pointer .cursor-ring {
+  opacity: 1;
+}
+
+/* fallback */
+body:not(.has-pointer) {
+  cursor: auto;
+}
+
+/* mobile safety */
+@media (max-width: 640px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
 
 /* ============ NOISE OVERLAY ============ */
 body::before {
