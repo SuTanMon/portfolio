@@ -3,42 +3,65 @@
    ============================= */
 
 // ── CUSTOM CURSOR ──────────────────────────────────
+// Only activate on real pointer devices (not touch)
 const dot  = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 
 let mouseX = 0, mouseY = 0;
 let ringX  = 0, ringY  = 0;
+let cursorActive = false;
 
+function activateCursor() {
+  if (cursorActive) return;
+  cursorActive = true;
+  document.body.classList.add('has-pointer');
+  startRingAnimation();
+}
+
+// Only fire on genuine mouse movement (not touch-generated)
 document.addEventListener('mousemove', (e) => {
+  // Ignore if this looks like a touch-generated event
+  if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
+  activateCursor();
   mouseX = e.clientX;
   mouseY = e.clientY;
-  dot.style.left  = mouseX + 'px';
-  dot.style.top   = mouseY + 'px';
+  if (dot) {
+    dot.style.left = mouseX + 'px';
+    dot.style.top  = mouseY + 'px';
+  }
 });
 
-// Ring follows with lag
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.14;
-  ringY += (mouseY - ringY) * 0.14;
-  ring.style.left = ringX + 'px';
-  ring.style.top  = ringY + 'px';
-  requestAnimationFrame(animateRing);
+// Deactivate if user touches the screen
+document.addEventListener('touchstart', () => {
+  if (!cursorActive) return;
+  cursorActive = false;
+  document.body.classList.remove('has-pointer');
+}, { passive: true });
+
+function startRingAnimation() {
+  function loop() {
+    ringX += (mouseX - ringX) * 0.14;
+    ringY += (mouseY - ringY) * 0.14;
+    if (ring) {
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
 }
-animateRing();
 
 // Cursor grow on hoverable elements
 document.querySelectorAll('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-item, .form-submit').forEach(el => {
   el.addEventListener('mouseenter', () => {
-    dot.style.transform  = 'translate(-50%, -50%) scale(2.5)';
-    dot.style.opacity    = '0.6';
-    ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
-    ring.style.borderColor = 'rgba(125,211,252,0.8)';
+    if (!cursorActive) return;
+    if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(2.5)'; dot.style.opacity = '0.6'; }
+    if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1.5)'; ring.style.borderColor = 'rgba(125,211,252,0.8)'; }
   });
   el.addEventListener('mouseleave', () => {
-    dot.style.transform  = 'translate(-50%, -50%) scale(1)';
-    dot.style.opacity    = '1';
-    ring.style.transform = 'translate(-50%, -50%) scale(1)';
-    ring.style.borderColor = 'rgba(125,211,252,0.5)';
+    if (!cursorActive) return;
+    if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(1)'; dot.style.opacity = '1'; }
+    if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'rgba(125,211,252,0.5)'; }
   });
 });
 
