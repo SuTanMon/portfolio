@@ -2,26 +2,27 @@
    JOHN KIRBY SOLIVEN — main.js
    ============================= */
 
-// ── CUSTOM CURSOR ──────────────────────────────────
-// Only activate on real pointer devices (not touch)
+// ── CUSTOM CURSOR (SAFE VERSION) ──────────────────
 const dot  = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 
 let mouseX = 0, mouseY = 0;
 let ringX  = 0, ringY  = 0;
-let cursorActive = false;
+let cursorActive   = false;
+let animationStarted = false;
 
 function activateCursor() {
-  if (cursorActive) return;
+  if (cursorActive || !dot || !ring) return;
   cursorActive = true;
   document.body.classList.add('has-pointer');
-  startRingAnimation();
+  if (!animationStarted) {
+    animationStarted = true;
+    startRingAnimation();
+  }
 }
 
-// Only fire on genuine mouse movement (not touch-generated)
+/* Mouse tracking */
 document.addEventListener('mousemove', (e) => {
-  // Ignore if this looks like a touch-generated event
-  if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
   activateCursor();
   mouseX = e.clientX;
   mouseY = e.clientY;
@@ -31,18 +32,18 @@ document.addEventListener('mousemove', (e) => {
   }
 });
 
-// Deactivate if user touches the screen
+/* Touch fallback */
 document.addEventListener('touchstart', () => {
-  if (!cursorActive) return;
   cursorActive = false;
   document.body.classList.remove('has-pointer');
 }, { passive: true });
 
+/* Smooth ring follow */
 function startRingAnimation() {
   function loop() {
-    ringX += (mouseX - ringX) * 0.14;
-    ringY += (mouseY - ringY) * 0.14;
-    if (ring) {
+    if (cursorActive && ring) {
+      ringX += (mouseX - ringX) * 0.14;
+      ringY += (mouseY - ringY) * 0.14;
       ring.style.left = ringX + 'px';
       ring.style.top  = ringY + 'px';
     }
@@ -51,18 +52,21 @@ function startRingAnimation() {
   loop();
 }
 
-// Cursor grow on hoverable elements
-document.querySelectorAll('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-item, .form-submit').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    if (!cursorActive) return;
-    if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(2.5)'; dot.style.opacity = '0.6'; }
-    if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1.5)'; ring.style.borderColor = 'rgba(125,211,252,0.8)'; }
-  });
-  el.addEventListener('mouseleave', () => {
-    if (!cursorActive) return;
-    if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(1)'; dot.style.opacity = '1'; }
-    if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'rgba(125,211,252,0.5)'; }
-  });
+/* Hover effects */
+document.addEventListener('mouseover', (e) => {
+  if (!cursorActive) return;
+  const target = e.target.closest('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send');
+  if (!target) return;
+  if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(2.5)'; dot.style.opacity = '0.6'; }
+  if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1.5)'; ring.style.borderColor = 'rgba(125,211,252,0.8)'; }
+});
+
+document.addEventListener('mouseout', (e) => {
+  if (!cursorActive) return;
+  const target = e.target.closest('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-card, .btn-send');
+  if (!target) return;
+  if (dot)  { dot.style.transform  = 'translate(-50%, -50%) scale(1)'; dot.style.opacity = '1'; }
+  if (ring) { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'rgba(125,211,252,0.5)'; }
 });
 
 // ── NAVBAR SCROLL ──────────────────────────────────
