@@ -2,97 +2,44 @@
    JOHN KIRBY SOLIVEN — main.js
    ============================= */
 
-// ── CUSTOM CURSOR (BULLETPROOF FIXED VERSION) ──
+// ── CUSTOM CURSOR ──────────────────────────────────
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
 
-document.addEventListener('DOMContentLoaded', () => {
+let mouseX = 0, mouseY = 0;
+let ringX  = 0, ringY  = 0;
 
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  dot.style.left  = mouseX + 'px';
+  dot.style.top   = mouseY + 'px';
+});
 
-  // safety check (prevents silent failure)
-  if (!dot || !ring) {
-    console.warn("Cursor elements not found");
-    return;
-  }
+// Ring follows with lag
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.14;
+  ringY += (mouseY - ringY) * 0.14;
+  ring.style.left = ringX + 'px';
+  ring.style.top  = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
 
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
-  let cursorActive = false;
-  let animationStarted = false;
-
-  function activateCursor() {
-    if (cursorActive) return;
-
-    cursorActive = true;
-    document.body.classList.add('has-pointer');
-
-    if (!animationStarted) {
-      animationStarted = true;
-      startRingAnimation();
-    }
-  }
-
-  document.addEventListener('mousemove', (e) => {
-    activateCursor();
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    dot.style.left = mouseX + 'px';
-    dot.style.top  = mouseY + 'px';
-  });
-
-  document.addEventListener('touchstart', () => {
-    cursorActive = false;
-    document.body.classList.remove('has-pointer');
-  }, { passive: true });
-
-  function startRingAnimation() {
-    function loop() {
-      if (cursorActive) {
-        ringX += (mouseX - ringX) * 0.14;
-        ringY += (mouseY - ringY) * 0.14;
-
-        ring.style.left = ringX + 'px';
-        ring.style.top  = ringY + 'px';
-      }
-
-      requestAnimationFrame(loop);
-    }
-
-    loop();
-  }
-
-  document.addEventListener('mouseover', (e) => {
-    if (!cursorActive) return;
-
-    const target = e.target.closest(
-      'a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-item, .form-submit'
-    );
-
-    if (!target) return;
-
-    dot.style.transform = 'translate(-50%, -50%) scale(2.5)';
-    dot.style.opacity = '0.6';
-
+// Cursor grow on hoverable elements
+document.querySelectorAll('a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-item, .form-submit').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    dot.style.transform  = 'translate(-50%, -50%) scale(2.5)';
+    dot.style.opacity    = '0.6';
     ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
     ring.style.borderColor = 'rgba(125,211,252,0.8)';
   });
-
-  document.addEventListener('mouseout', (e) => {
-    const target = e.target.closest(
-      'a, button, .card, .tech-card, .cert-card, .value-item, .contact-link-item, .form-submit'
-    );
-
-    if (!target || !cursorActive) return;
-
-    dot.style.transform = 'translate(-50%, -50%) scale(1)';
-    dot.style.opacity = '1';
-
+  el.addEventListener('mouseleave', () => {
+    dot.style.transform  = 'translate(-50%, -50%) scale(1)';
+    dot.style.opacity    = '1';
     ring.style.transform = 'translate(-50%, -50%) scale(1)';
     ring.style.borderColor = 'rgba(125,211,252,0.5)';
   });
-
 });
 
 // ── NAVBAR SCROLL ──────────────────────────────────
