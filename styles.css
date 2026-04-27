@@ -78,13 +78,9 @@ body {
   pointer-events: none;
   opacity: 0; /* hidden until JS confirms pointer device */
 }
-/* JS adds .has-pointer to <body> on first mousemove */
-body.has-pointer { cursor: none; }
+/* Show custom cursor on pointer devices */
 body.has-pointer .cursor-dot,
 body.has-pointer .cursor-ring { opacity: 1; }
-body.has-pointer a,
-body.has-pointer button,
-body.has-pointer [role="button"] { cursor: none; }
 
 /* ============ NOISE OVERLAY ============ */
 body::before {
