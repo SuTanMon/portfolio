@@ -97,9 +97,28 @@ if (navbar) {
 const toggle = document.getElementById('navToggle');
 const nav    = document.querySelector('nav');
 if (toggle && nav) {
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  // stopPropagation prevents the document listener from
+  // immediately closing the menu on the same tap
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nav.classList.toggle('open');
+    toggle.classList.toggle('is-open');
+  });
+
+  // Close when a nav link is tapped
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.classList.remove('is-open');
+    });
+  });
+
+  // Close when tapping outside
   document.addEventListener('click', (e) => {
-    if (!navbar.contains(e.target)) nav.classList.remove('open');
+    if (navbar && !navbar.contains(e.target)) {
+      nav.classList.remove('open');
+      toggle.classList.remove('is-open');
+    }
   });
 }
 
