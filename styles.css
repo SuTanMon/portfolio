@@ -1,6 +1,6 @@
 /* ===========================
    JOHN KIRBY SOLIVEN PORTFOLIO
-   Elevated Dark Glassmorphism v2
+   Elevated Dark Glassmorphism
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -239,8 +239,12 @@ nav a {
 nav a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
 nav a.active { color: var(--white); background: rgba(125,211,252,0.1); color: var(--accent); border: 1px solid rgba(125,211,252,0.15); }
 
-.nav-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--light-text); border-radius: 2px; transition: var(--transition); }
+.nav-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; z-index: 101; position: relative; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--light-text); border-radius: 2px; transition: var(--transition); transform-origin: center; }
+/* Animate to X when open */
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ============ HERO SECTION ============ */
 .hero {
@@ -249,7 +253,7 @@ nav a.active { color: var(--white); background: rgba(125,211,252,0.1); color: va
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding: 120px 8% 80px;
+  padding: 120px 8% 100px;
   overflow: hidden;
   background: var(--gradient-hero);
 }
@@ -355,7 +359,7 @@ nav a.active { color: var(--white); background: rgba(125,211,252,0.1); color: va
 .hero-text h1 { margin-bottom: 20px; }
 .hero-sub { font-size: 1.1rem; color: #94a3b8; max-width: 480px; margin-bottom: 36px; line-height: 1.8; }
 
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
 
 .hero-stats { display: flex; align-items: center; gap: 28px; }
 .stat span {
@@ -436,7 +440,7 @@ nav a.active { color: var(--white); background: rgba(125,211,252,0.1); color: va
 /* SCROLL HINT */
 .scroll-hint {
   position: absolute;
-  bottom: 40px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -610,7 +614,7 @@ footer::before {
 
 /* ============ PAGE HERO ============ */
 .page-hero {
-  padding: 170px 8% 90px;
+  padding: 160px 8% 90px;
   position: relative;
   overflow: hidden;
   background: var(--gradient-hero);
@@ -1006,16 +1010,77 @@ footer::before {
 }
 
 @media (max-width: 640px) {
-  .navbar { padding: 14px 5%; }
-  nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: rgba(4,6,15,0.97); padding: 20px; border-top: 1px solid var(--glass-border); }
+  /* Navbar */
+  .navbar { padding: 12px 5%; }
+  nav {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0; right: 0;
+    flex-direction: column;
+    background: rgba(4, 6, 15, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 16px 5% 24px;
+    border-bottom: 1px solid var(--glass-border);
+    gap: 4px;
+    z-index: 99;
+  }
   nav.open { display: flex; }
+  nav a {
+    padding: 14px 18px;
+    font-size: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+  }
   .nav-toggle { display: flex; }
-  .hero { padding: 100px 5% 60px; }
+
+  /* Hero — extra bottom padding so scroll hint never overlaps stats */
+  .hero { padding: 100px 5% 120px; }
+  .hero-container { gap: 28px; }
+  .image-frame { width: 180px; height: 180px; }
+
+  /* Hide float badges on mobile — they overflow off-screen */
+  .float-badge { display: none; }
+
+  /* Remove the extra ring on small screens */
+  .ring-3 { display: none; }
+
+  /* Scroll hint — hide on mobile, it overlaps too easily */
+  .scroll-hint { display: none; }
+
+  /* Stats */
+  .hero-stats { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .stat-divider { display: none; }
+  .stat { min-width: 80px; text-align: center; }
+
+  /* Typography */
+  h1 { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+  h2 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  .hero-sub { font-size: 1rem; }
+
+  /* Buttons stack vertically */
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; max-width: 280px; justify-content: center; }
+
+  /* Sections */
   .chapters, .cta, .about-section, .techstack-section, .cert-section { padding-left: 5%; padding-right: 5%; }
-  .cta-glass { padding: 40px 24px; }
-  .hero-stats { flex-wrap: wrap; justify-content: center; }
-  .cert-intro { flex-direction: column; text-align: center; }
+  .chapter-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .cta-glass { padding: 36px 20px; }
+
+  /* Cert intro */
+  .cert-intro { flex-direction: column; text-align: center; padding: 24px 20px; }
+
+  /* About */
+  .about-img-frame { max-width: 260px; margin: 0 auto; }
+
+  /* Footer */
   .footer-inner { flex-direction: column; text-align: center; }
-  body { cursor: auto; }
+  .footer-links { justify-content: center; }
+
+  /* Cursor */
   .cursor-dot, .cursor-ring { display: none; }
 }
