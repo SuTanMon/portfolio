@@ -8,239 +8,266 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ── CONTACT PAGE SPECIFIC ── */
-    .contact-section {
-      padding: 90px 8% 120px;
-      background: var(--dark);
-    }
-
+    .contact-section { padding: 90px 8% 120px; background: var(--dark); 
+      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 20px 20px;}
     .contact-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 60px;
-      align-items: start;
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; align-items: start;
     }
-
-    /* LEFT — info panel */
-    .contact-info { display: flex; flex-direction: column; gap: 28px; }
-
+    .contact-info { display: flex; 
+      flex-direction: column; 
+      gap: 24px; 
+    }
     .contact-info h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      line-height: 1.15;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      line-height: 1.2; 
       color: var(--white);
-      margin-bottom: 4px;
     }
-    .contact-info > p {
-      color: #94a3b8;
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-
-    .contact-links { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
-
-    .contact-link-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      cursor: none;
-    }
-    .contact-link-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--gradient-accent);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-      transform-origin: bottom;
-    }
-    .contact-link-item:hover {
-      border-color: rgba(125,211,252,0.25);
-      background: rgba(125,211,252,0.04);
-      transform: translateX(4px);
-    }
-    .contact-link-item:hover::before { transform: scaleY(1); }
-
-    .cli-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.2rem;
-    }
-    .cli-icon.github { background: rgba(255,255,255,0.06); }
-    .cli-icon.credly { background: rgba(255,123,0,0.1); }
-
-    .cli-text { flex: 1; }
-    .cli-text strong { display: block; font-size: 0.9rem; color: var(--white); font-weight: 600; margin-bottom: 2px; }
-    .cli-text span { font-size: 0.8rem; color: var(--muted); }
-
-    .cli-arrow { color: var(--muted); font-size: 0.9rem; transition: var(--transition); }
-    .contact-link-item:hover .cli-arrow { color: var(--accent); transform: translateX(3px); }
-
+    .contact-info > p { 
+      color: #94a3b8; 
+      line-height: 1.8; 
+      font-size: 0.93rem; }
     .contact-availability {
-      display: flex;
-      align-items: center;
+      display: flex; 
+      align-items: center; 
       gap: 10px;
-      padding: 14px 18px;
+      padding: 12px 18px;
       background: rgba(74,222,128,0.06);
       border: 1px solid rgba(74,222,128,0.15);
-      border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      border-radius: 50px; 
+      font-size: 0.82rem; 
       color: #86efac;
+      width: fit-content;
     }
     .avail-dot {
-      width: 8px; height: 8px;
+      width: 7px; height: 7px; 
       border-radius: 50%;
-      background: #4ade80;
+      background: #4ade80; 
       box-shadow: 0 0 8px #4ade80;
-      animation: pulse-dot 2s ease-in-out infinite;
+      animation: pulse-dot 2s ease-in-out infinite; 
       flex-shrink: 0;
     }
     @keyframes pulse-dot {
       0%, 100% { box-shadow: 0 0 6px #4ade80; }
       50% { box-shadow: 0 0 14px #4ade80, 0 0 20px rgba(74,222,128,0.3); }
     }
-
-    /* RIGHT — form */
-    .contact-form-card {
-      background: rgba(255,255,255,0.03);
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-link-item {
+      display: flex; 
+      align-items: center; 
+      gap: 16px;
+      padding: 15px 20px;
+      background: var(--glass-bg); 
       border: 1px solid var(--glass-border);
-      border-radius: 24px;
+      border-radius: var(--radius-sm); 
+      text-decoration: none;
+      transition: var(--transition); 
+      position: relative; 
+      overflow: hidden;
+    }
+    .contact-link-item::before {
+      content: ''; 
+      position: absolute; 
+      left: 0; top: 0; bottom: 0;
+      width: 3px; 
+      background: var(--gradient-accent);
+      transform: scaleY(0); 
+      transition: transform 0.3s ease; 
+      transform-origin: bottom;
+    }
+    .contact-link-item:hover { border-color: rgba(125,211,252,0.25); transform: translateX(4px); }
+    .contact-link-item:hover::before { transform: scaleY(1); }
+    .cli-icon {
+      width: 42px; height: 42px; 
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; 
+      font-size: 1.1rem;
+    }
+    .cli-icon.github { background: rgba(255,255,255,0.06); }
+    .cli-icon.credly { background: rgba(255,123,0,0.1); }
+    .cli-text { flex: 1; }
+    .cli-text strong { display: block; font-size: 0.88rem; color: var(--white); font-weight: 600; margin-bottom: 2px; }
+    .cli-text span { font-size: 0.78rem; color: var(--muted); }
+    .cli-arrow { color: var(--muted); font-size: 0.85rem; transition: var(--transition); }
+    .contact-link-item:hover .cli-arrow { color: var(--accent); transform: translateX(3px); }
+
+    /* FORM CARD */
+    .contact-form-card {
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid var(--glass-border);
+      border-radius: 24px; 
       padding: 40px 44px;
-      backdrop-filter: blur(24px);
-      position: relative;
+      position: relative; 
       overflow: hidden;
     }
     .contact-form-card::before {
-      content: '';
-      position: absolute;
+      content: ''; 
+      position: absolute; 
       top: -60px; right: -60px;
       width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(167,139,250,0.1), transparent 70%);
+      background: radial-gradient(circle, rgba(167,139,250,0.09), transparent 70%);
       pointer-events: none;
     }
-
-    .form-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .form-subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
-
-    .form-group { margin-bottom: 22px; }
+    .form-title { 
+      font-family: var(--font-display); 
+      font-size: 1.4rem; 
+      color: var(--white); 
+      margin-bottom: 28px; }
+    .form-group { margin-bottom: 20px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
     label {
-      display: block;
-      font-size: 0.8rem;
+      display: block; 
+      font-size: 0.75rem; 
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--muted); 
       margin-bottom: 8px;
     }
-
-    input, textarea, select {
-      width: 100%;
+    input, textarea {
+      width: 100%; 
       background: rgba(255,255,255,0.04);
-      border: 1px solid var(--glass-border);
+      border: 1px solid var(--glass-border); 
       border-radius: var(--radius-sm);
-      padding: 13px 16px;
-      font-family: var(--font-body);
+      padding: 12px 16px; 
+      font-family: var(--font-body); 
       font-size: 0.9rem;
-      color: var(--light-text);
-      transition: var(--transition);
-      outline: none;
+      color: var(--light-text); 
+      transition: var(--transition); 
+      outline: none; 
       resize: none;
     }
-    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input::placeholder, textarea::placeholder { color: #475569; }
     input:focus, textarea:focus {
-      border-color: rgba(125,211,252,0.4);
-      background: rgba(125,211,252,0.04);
-      box-shadow: 0 0 0 3px rgba(125,211,252,0.08);
+      border-color: rgba(125,211,252,0.4); 
+      background: rgba(125,211,252,0.03);
+      box-shadow: 0 0 0 3px rgba(125,211,252,0.07);
     }
-    textarea { min-height: 130px; line-height: 1.7; }
-
-    .form-submit {
-      width: 100%;
-      padding: 14px;
+    textarea { min-height: 120px; line-height: 1.7; }
+    .btn-send {
+      width: 100%; 
+      padding: 14px; 
       background: var(--gradient-accent);
-      color: var(--dark);
-      font-family: var(--font-body);
+      color: var(--dark); 
+      font-family: var(--font-body); 
       font-size: 0.95rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 50px;
-      cursor: none;
-      transition: var(--transition);
-      position: relative;
+      font-weight: 700; 
+      border: none; border-radius: 50px; 
+      cursor: pointer;
+      transition: var(--transition); 
+      position: relative; 
       overflow: hidden;
-      letter-spacing: 0.5px;
     }
-    .form-submit::after {
-      content: '';
-      position: absolute;
+    .btn-send::after {
+      content: ''; 
+      position: absolute; 
       inset: 0;
-      background: rgba(255,255,255,0.15);
-      transform: translateX(-100%);
+      background: rgba(255,255,255,0.14);
+      transform: translateX(-100%); 
       transition: transform 0.4s ease;
     }
-    .form-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(125,211,252,0.4);
-    }
-    .form-submit:hover::after { transform: translateX(0); }
+    .btn-send:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(125,211,252,0.35); }
+    .btn-send:hover::after { transform: translateX(0); }
 
-    .form-note {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 14px;
-    }
-    .form-note a { color: var(--accent); text-decoration: none; }
-
-    /* SUCCESS STATE */
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-      animation: fadeUp 0.5s ease forwards;
+    /* SUCCESS */
+    #formSuccess { display: none; }
+    .success-header { 
+      text-align: center; 
+      margin-bottom: 28px; 
     }
     .success-icon {
-      font-size: 3.5rem;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 0 20px rgba(74,222,128,0.5));
+      font-size: 2.6rem; 
+      display: block; 
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 14px rgba(74,222,128,0.5));
     }
-    .form-success h3 {
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      margin-bottom: 10px;
+    .success-header h3 { 
+      font-family: var(--font-display); font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
+    .success-header p { font-size: 0.88rem; color: #94a3b8; }
+    .msg-preview {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm); 
+      padding: 16px 18px; margin-bottom: 20px;
+      font-size: 0.83rem; 
+      color: #94a3b8; 
+      line-height: 1.7;
+      white-space: pre-wrap; 
+      word-break: break-word;
+      max-height: 150px; 
+      overflow-y: auto;
     }
-    .form-success p { color: var(--muted); font-size: 0.9rem; }
+    .msg-preview::-webkit-scrollbar { width: 3px; }
+    .msg-preview::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+    .action-btns { 
+      display: flex; 
+      gap: 12px; }
+    .btn-copy-msg {
+      flex: 1; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px;
+      padding: 13px 18px; background: var(--gradient-accent); color: var(--dark);
+      font-family: var(--font-body); 
+      font-size: 0.87rem; 
+      font-weight: 700;
+      border: none; 
+      border-radius: 50px; 
+      cursor: pointer; 
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .btn-copy-msg:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(125,211,252,0.3); }
+    .btn-copy-msg.copied { background: linear-gradient(135deg, #4ade80, #22d3ee); }
+    .btn-gmail {
+      flex: 1; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px;
+      padding: 13px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border);
+      color: var(--accent); 
+      font-family: var(--font-body); 
+      font-size: 0.87rem; 
+      font-weight: 600;
+      border-radius: 50px; 
+      text-decoration: none; 
+      transition: var(--transition);
+    }
+    .btn-gmail:hover { 
+      background: rgba(125,211,252,0.07); 
+      border-color: rgba(125,211,252,0.3); 
+      transform: translateY(-2px); }
+    .try-again {
+      display: block; 
+      text-align: center; 
+      font-size: 0.78rem; 
+      color: var(--muted);
+      margin-top: 16px; 
+      cursor: pointer; background: none; border: none; width: 100%;
+      transition: color 0.2s;
+    }
+    .try-again:hover { color: var(--accent); }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)} 
+      20%{transform:translateX(-5px)}
+      40%{transform:translateX(5px)} 
+      60%{transform:translateX(-3px)} 
+      80%{transform:translateX(3px)}
+    }
+    .field-error { border-color: rgba(248,113,113,0.55) !important; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
-      .contact-form-card { padding: 28px 24px; }
+      .contact-wrapper { 
+        grid-template-columns: 1fr; 
+        gap: 36px; }
+      .contact-form-card { padding: 28px 22px; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
+      .action-btns { flex-direction: column; }
     }
   </style>
 </head>
@@ -256,6 +283,7 @@
       <a href="about.html">About</a>
       <a href="techstack.html">Tech Stack</a>
       <a href="certifications.html">Certifications</a>
+      <a href="contact.html" class="active">Contact</a>
     </nav>
     <div class="nav-toggle" id="navToggle">
       <span></span><span></span><span></span>
@@ -269,7 +297,7 @@
     </div>
     <div class="stars" id="stars"></div>
     <div class="page-hero-content">
-      <p class="section-tag">— Let's Connect</p>
+      <p class="section-tag">— Hit Me Up</p>
       <h1>Get In <span class="name-gradient">Touch</span></h1>
     </div>
   </section>
@@ -277,22 +305,22 @@
   <section class="contact-section">
     <div class="contact-wrapper">
 
-      <!-- LEFT: INFO -->
+      <!-- LEFT -->
       <div class="contact-info">
         <div>
-          <h2>Let's build something <span class="name-gradient">great</span> together.</h2>
-          <p style="margin-top:14px;">Whether it's an internship, a project, a collaboration, or just a conversation about web dev — I'm always open. Fill the form or reach out directly.</p>
+          <h2>Let's build something <span class="name-gradient">together</span>.</h2>
+          <p style="margin-top:12px;">Whether it's an internship, a project, a collab, or you just want to connect — feel free to reach out. I'll get back to you.</p>
         </div>
 
         <div class="contact-availability">
           <div class="avail-dot"></div>
-          Available for internships & collaborations
+          Open to internships & collabs
         </div>
 
         <div class="contact-links">
           <a href="https://github.com/SuTanMon" target="_blank" class="contact-link-item">
             <div class="cli-icon github">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#e2e8f0"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#e2e8f0"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
             </div>
             <div class="cli-text">
               <strong>GitHub</strong>
@@ -303,64 +331,60 @@
 
           <a href="https://www.credly.com/users/john-kirby-soliven/badges" target="_blank" class="contact-link-item">
             <div class="cli-icon credly">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fb923c"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 1.6a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#fb923c"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.8a7.2 7.2 0 1 1 0 14.4A7.2 7.2 0 0 1 12 4.8zm0 2.4a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 1.6a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4z"/></svg>
             </div>
             <div class="cli-text">
-              <strong>Credly Badges</strong>
-              <span>View verified certifications</span>
+              <strong>Credly</strong>
+              <span>View my certifications</span>
             </div>
             <span class="cli-arrow">→</span>
           </a>
         </div>
 
-        <p style="font-size:0.82rem; color:var(--muted); margin-top:4px;">
-          📬 Your message goes directly to my inbox. I usually respond within 24–48 hours.
-        </p>
+        <p style="font-size:0.8rem; color:var(--muted);">📬 Usually replies within 24–48 hours.</p>
       </div>
 
-      <!-- RIGHT: FORM -->
+      <!-- RIGHT -->
       <div class="contact-form-card">
 
-        <!-- FORM -->
         <div id="contactForm">
           <h3 class="form-title">Send a Message</h3>
-          <p class="form-subtitle">I'll get back to you as soon as I can.</p>
-
           <div class="form-row">
             <div class="form-group">
               <label for="fname">Name</label>
-              <input type="text" id="fname" placeholder="Your name" required>
+              <input type="text" id="fname" placeholder="Your name">
             </div>
             <div class="form-group">
               <label for="femail">Email</label>
-              <input type="email" id="femail" placeholder="your@email.com" required>
+              <input type="email" id="femail" placeholder="your@email.com">
             </div>
           </div>
-
           <div class="form-group">
             <label for="fsubject">Subject</label>
             <input type="text" id="fsubject" placeholder="What's this about?">
           </div>
-
           <div class="form-group">
             <label for="fmessage">Message</label>
-            <textarea id="fmessage" placeholder="Tell me about your project, opportunity, or just say hi..."></textarea>
+            <textarea id="fmessage" placeholder="Say hi, ask something, or toss a project..."></textarea>
           </div>
-
-          <button class="form-submit" id="sendBtn" onclick="sendMessage()">
-            Send Message ✦
-          </button>
-          <p class="form-note">
-            This will open your email client with the message pre-filled.
-          </p>
+          <button class="btn-send" onclick="handleSend()">Send Message ✦</button>
         </div>
 
-        <!-- SUCCESS STATE -->
-        <div class="form-success" id="formSuccess">
-          <div class="success-icon">✅</div>
-          <h3>Email client opened!</h3>
-          <p>Your message is ready to send. Just hit send in your email app.<br><br>
-          Prefer to copy the address? <a href="#" id="revealEmailLink">Click here</a>.</p>
+        <div id="formSuccess">
+          <div class="success-header">
+            <span class="success-icon">🎉</span>
+            <h3>Your message is ready!</h3>
+            <p>Copy it then paste it in Gmail, or just click <strong style="color:var(--accent)">Open Gmail</strong> to go straight there.</p>
+          </div>
+          <div class="msg-preview" id="msgPreview"></div>
+          <div class="action-btns">
+            <button class="btn-copy-msg" id="copyMsgBtn" onclick="copyMessage()">
+              <span id="copyIcon">📋</span>
+              <span id="copyLabel">Copy Message</span>
+            </button>
+            <a class="btn-gmail" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">✉️ Open Gmail</a>
+          </div>
+          <button class="try-again" onclick="resetForm()">← Send another message</button>
         </div>
 
       </div>
@@ -380,75 +404,90 @@
 
   <script src="main.js"></script>
   <script>
-    // Email obfuscated — assembled at runtime so crawlers can't scrape it
-    function getEmail() {
-      const u = 'johnkirbysoliven13';
-      const d = 'gmail.com';
-      return u + '@' + d;
-    }
+    function handleSend() {
+      const nameEl  = document.getElementById('fname');
+      const emailEl = document.getElementById('femail');
+      let valid = true;
 
-    function sendMessage() {
-      const name    = document.getElementById('fname').value.trim();
-      const email   = document.getElementById('femail').value.trim();
+      [nameEl, emailEl].forEach(el => {
+        if (!el.value.trim()) {
+          el.classList.add('field-error');
+          el.style.animation = 'shake 0.4s ease';
+          setTimeout(() => el.style.animation = '', 450);
+          valid = false;
+        } else {
+          el.classList.remove('field-error');
+        }
+      });
+      if (!valid) { nameEl.focus(); return; }
+
+      const name    = nameEl.value.trim();
+      const email   = emailEl.value.trim();
       const subject = document.getElementById('fsubject').value.trim();
       const message = document.getElementById('fmessage').value.trim();
 
-      if (!name || !email) {
-        // Shake the empty fields
-        if (!name)  shakeFocus('fname');
-        if (!email) shakeFocus('femail');
-        return;
-      }
+      document.getElementById('msgPreview').textContent =
+        `From: ${name} <${email}>\nSubject: ${subject || '(No subject)'}\n\n${message || '(No message)'}`;
 
-      const subjectLine = encodeURIComponent(subject || 'Portfolio Inquiry');
-      const body = encodeURIComponent(
-        `Hi John Kirby,\n\nMy name is ${name} (${email}).\n\n${message || '(No message provided)'}\n\n— Sent via portfolio contact form`
-      );
-
-      const mailtoLink = `mailto:${getEmail()}?subject=${subjectLine}&body=${body}`;
-      window.location.href = mailtoLink;
-
-      // Show success state after short delay
+      const form    = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      form.style.transition = 'opacity 0.25s ease';
+      form.style.opacity = '0';
       setTimeout(() => {
-        document.getElementById('contactForm').style.display  = 'none';
-        document.getElementById('formSuccess').style.display  = 'block';
-      }, 600);
+        form.style.display    = 'none';
+        success.style.display = 'block';
+        success.style.opacity = '0';
+        success.style.transition = 'opacity 0.35s ease';
+        requestAnimationFrame(() => success.style.opacity = '1');
+      }, 260);
     }
 
-    // Shake animation for required fields
-    function shakeFocus(id) {
-      const el = document.getElementById(id);
-      el.style.borderColor = 'rgba(248,113,113,0.6)';
-      el.style.animation   = 'shake 0.4s ease';
-      el.focus();
-      setTimeout(() => { el.style.animation = ''; }, 500);
+    function copyMessage() {
+      const text  = document.getElementById('msgPreview').textContent;
+      const btn   = document.getElementById('copyMsgBtn');
+      const icon  = document.getElementById('copyIcon');
+      const label = document.getElementById('copyLabel');
+      const done  = () => {
+        btn.classList.add('copied');
+        icon.textContent  = '✅';
+        label.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          icon.textContent  = '📋';
+          label.textContent = 'Copy Message';
+        }, 2500);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+      } else { 
+        fallback(text, done); }
     }
 
-    // Reveal email on request (still assembled at runtime)
-    document.getElementById('revealEmailLink').addEventListener('click', (e) => {
-      e.preventDefault();
-      e.target.textContent = getEmail();
-      e.target.href = 'mailto:' + getEmail();
-      e.target.style.fontWeight = '600';
-    });
+    function fallback(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text; 
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); 
+      ta.select();
+      document.execCommand('copy'); 
+      document.body.removeChild(ta); cb();
+    }
 
-    // Shake keyframe
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes shake {
-        0%,100%{transform:translateX(0)}
-        20%{transform:translateX(-6px)}
-        40%{transform:translateX(6px)}
-        60%{transform:translateX(-4px)}
-        80%{transform:translateX(4px)}
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Allow Enter key in inputs to progress
-    document.getElementById('fmessage').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && e.ctrlKey) sendMessage();
-    });
+    function resetForm() {
+      const form    = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      success.style.opacity = '0';
+      setTimeout(() => {
+        success.style.display = 'none';
+        form.style.display    = 'block';
+        form.style.opacity    = '0';
+        requestAnimationFrame(() => form.style.opacity = '1');
+        ['fname','femail','fsubject','fmessage'].forEach(id => {
+          const el = document.getElementById(id);
+          el.value = ''; el.classList.remove('field-error');
+        });
+      }, 250);
+    }
   </script>
 </body>
 </html>
