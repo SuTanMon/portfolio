@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ── EMAILJS ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init({ publicKey: "dm6kkHaZX8jp6t8gy" }); // 🔑 EmailJS public key
+  </script>
+
   <style>
     .contact-section { padding: 90px 8% 120px; background: var(--dark); 
       background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 1px);
@@ -172,6 +179,34 @@
     }
     .btn-send:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(125,211,252,0.35); }
     .btn-send:hover::after { transform: translateX(0); }
+    .btn-send:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* STATUS MESSAGE (sending / error) */
+    .form-status {
+      display: none;
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 14px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+    }
+    .form-status.sending {
+      display: block;
+      background: rgba(125,211,252,0.07);
+      border: 1px solid rgba(125,211,252,0.18);
+      color: var(--accent);
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(248,113,113,0.07);
+      border: 1px solid rgba(248,113,113,0.2);
+      color: #fca5a5;
+    }
 
     /* SUCCESS */
     #formSuccess { display: none; }
@@ -188,66 +223,12 @@
     .success-header h3 { 
       font-family: var(--font-display); font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
     .success-header p { font-size: 0.88rem; color: #94a3b8; }
-    .msg-preview {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-      border-radius: var(--radius-sm); 
-      padding: 16px 18px; margin-bottom: 20px;
-      font-size: 0.83rem; 
-      color: #94a3b8; 
-      line-height: 1.7;
-      white-space: pre-wrap; 
-      word-break: break-word;
-      max-height: 150px; 
-      overflow-y: auto;
-    }
-    .msg-preview::-webkit-scrollbar { width: 3px; }
-    .msg-preview::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
-    .action-btns { 
-      display: flex; 
-      gap: 12px; }
-    .btn-copy-msg {
-      flex: 1; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 8px;
-      padding: 13px 18px; background: var(--gradient-accent); color: var(--dark);
-      font-family: var(--font-body); 
-      font-size: 0.87rem; 
-      font-weight: 700;
-      border: none; 
-      border-radius: 50px; 
-      cursor: pointer; 
-      transition: var(--transition);
-      position: relative; overflow: hidden;
-    }
-    .btn-copy-msg:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(125,211,252,0.3); }
-    .btn-copy-msg.copied { background: linear-gradient(135deg, #4ade80, #22d3ee); }
-    .btn-gmail {
-      flex: 1; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center; 
-      gap: 8px;
-      padding: 13px 18px; background: var(--glass-bg); border: 1px solid var(--glass-border);
-      color: var(--accent); 
-      font-family: var(--font-body); 
-      font-size: 0.87rem; 
-      font-weight: 600;
-      border-radius: 50px; 
-      text-decoration: none; 
-      transition: var(--transition);
-    }
-    .btn-gmail:hover { 
-      background: rgba(125,211,252,0.07); 
-      border-color: rgba(125,211,252,0.3); 
-      transform: translateY(-2px); }
     .try-again {
       display: block; 
       text-align: center; 
       font-size: 0.78rem; 
       color: var(--muted);
-      margin-top: 16px; 
+      margin-top: 20px; 
       cursor: pointer; background: none; border: none; width: 100%;
       transition: color 0.2s;
     }
@@ -267,7 +248,6 @@
         gap: 36px; }
       .contact-form-card { padding: 28px 22px; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
-      .action-btns { flex-direction: column; }
     }
   </style>
 </head>
@@ -347,42 +327,37 @@
       <!-- RIGHT -->
       <div class="contact-form-card">
 
+        <!-- FORM -->
         <div id="contactForm">
           <h3 class="form-title">Send a Message</h3>
           <div class="form-row">
             <div class="form-group">
               <label for="fname">Name</label>
-              <input type="text" id="fname" placeholder="Your name">
+              <input type="text" id="fname" name="name" placeholder="Your name">
             </div>
             <div class="form-group">
               <label for="femail">Email</label>
-              <input type="email" id="femail" placeholder="your@email.com">
+              <input type="email" id="femail" name="email" placeholder="your@email.com">
             </div>
           </div>
           <div class="form-group">
             <label for="fsubject">Subject</label>
-            <input type="text" id="fsubject" placeholder="What's this about?">
+            <input type="text" id="fsubject" name="title" placeholder="What's this about?">
           </div>
           <div class="form-group">
             <label for="fmessage">Message</label>
-            <textarea id="fmessage" placeholder="Say hi, ask something, or toss a project..."></textarea>
+            <textarea id="fmessage" name="message" placeholder="Say hi, ask something, or toss a project..."></textarea>
           </div>
-          <button class="btn-send" onclick="handleSend()">Send Message ✦</button>
+          <button class="btn-send" id="sendBtn" onclick="handleSend()">Send Message ✦</button>
+          <div class="form-status" id="formStatus"></div>
         </div>
 
+        <!-- SUCCESS STATE -->
         <div id="formSuccess">
           <div class="success-header">
             <span class="success-icon">🎉</span>
-            <h3>Your message is ready!</h3>
-            <p>Copy it then paste it in Gmail, or just click <strong style="color:var(--accent)">Open Gmail</strong> to go straight there.</p>
-          </div>
-          <div class="msg-preview" id="msgPreview"></div>
-          <div class="action-btns">
-            <button class="btn-copy-msg" id="copyMsgBtn" onclick="copyMessage()">
-              <span id="copyIcon">📋</span>
-              <span id="copyLabel">Copy Message</span>
-            </button>
-            <a class="btn-gmail" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">✉️ Open Gmail</a>
+            <h3>Message sent!</h3>
+            <p>Thanks for reaching out — I'll get back to you within 24–48 hours.</p>
           </div>
           <button class="try-again" onclick="resetForm()">← Send another message</button>
         </div>
@@ -405,10 +380,15 @@
   <script src="main.js"></script>
   <script>
     function handleSend() {
-      const nameEl  = document.getElementById('fname');
-      const emailEl = document.getElementById('femail');
-      let valid = true;
+      const nameEl    = document.getElementById('fname');
+      const emailEl   = document.getElementById('femail');
+      const subjectEl = document.getElementById('fsubject');
+      const messageEl = document.getElementById('fmessage');
+      const sendBtn   = document.getElementById('sendBtn');
+      const statusEl  = document.getElementById('formStatus');
 
+      // ── Validation ──────────────────────────────
+      let valid = true;
       [nameEl, emailEl].forEach(el => {
         if (!el.value.trim()) {
           el.classList.add('field-error');
@@ -421,71 +401,67 @@
       });
       if (!valid) { nameEl.focus(); return; }
 
-      const name    = nameEl.value.trim();
-      const email   = emailEl.value.trim();
-      const subject = document.getElementById('fsubject').value.trim();
-      const message = document.getElementById('fmessage').value.trim();
+      // ── Loading state ────────────────────────────
+      sendBtn.disabled    = true;
+      sendBtn.textContent = 'Sending…';
+      statusEl.className  = 'form-status sending';
+      statusEl.textContent = 'Sending your message…';
 
-      document.getElementById('msgPreview').textContent =
-        `From: ${name} <${email}>\nSubject: ${subject || '(No subject)'}\n\n${message || '(No message)'}`;
+      // ── EmailJS send ─────────────────────────────
+      const serviceID  = 'service_slc7tl8';   // Service ID
+      const templateID = 'template_3vugr89';  // Template ID
 
-      const form    = document.getElementById('contactForm');
-      const success = document.getElementById('formSuccess');
-      form.style.transition = 'opacity 0.25s ease';
-      form.style.opacity = '0';
-      setTimeout(() => {
-        form.style.display    = 'none';
-        success.style.display = 'block';
-        success.style.opacity = '0';
-        success.style.transition = 'opacity 0.35s ease';
-        requestAnimationFrame(() => success.style.opacity = '1');
-      }, 260);
-    }
-
-    function copyMessage() {
-      const text  = document.getElementById('msgPreview').textContent;
-      const btn   = document.getElementById('copyMsgBtn');
-      const icon  = document.getElementById('copyIcon');
-      const label = document.getElementById('copyLabel');
-      const done  = () => {
-        btn.classList.add('copied');
-        icon.textContent  = '✅';
-        label.textContent = 'Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          icon.textContent  = '📋';
-          label.textContent = 'Copy Message';
-        }, 2500);
+      const templateParams = {
+        name:    nameEl.value.trim(),
+        email:   emailEl.value.trim(),
+        title:   subjectEl.value.trim() || '(No subject)',
+        message: messageEl.value.trim() || '(No message)',
       };
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
-      } else { 
-        fallback(text, done); }
-    }
 
-    function fallback(text, cb) {
-      const ta = document.createElement('textarea');
-      ta.value = text; 
-      ta.style.cssText = 'position:fixed;opacity:0';
-      document.body.appendChild(ta); 
-      ta.select();
-      document.execCommand('copy'); 
-      document.body.removeChild(ta); cb();
+      emailjs.send(serviceID, templateID, templateParams)
+        .then(() => {
+          // ── Success ────────────────────────────
+          statusEl.className = 'form-status';
+          const form    = document.getElementById('contactForm');
+          const success = document.getElementById('formSuccess');
+          form.style.transition = 'opacity 0.25s ease';
+          form.style.opacity    = '0';
+          setTimeout(() => {
+            form.style.display    = 'none';
+            success.style.display = 'block';
+            success.style.opacity = '0';
+            success.style.transition = 'opacity 0.35s ease';
+            requestAnimationFrame(() => success.style.opacity = '1');
+          }, 260);
+        })
+        .catch((error) => {
+          // ── Error ──────────────────────────────
+          console.error('EmailJS error:', error);
+          statusEl.className   = 'form-status error';
+          statusEl.textContent = '❌ Something went wrong. Please try again or email me directly.';
+          sendBtn.disabled     = false;
+          sendBtn.textContent  = 'Send Message ✦';
+        });
     }
 
     function resetForm() {
       const form    = document.getElementById('contactForm');
       const success = document.getElementById('formSuccess');
+      const sendBtn = document.getElementById('sendBtn');
       success.style.opacity = '0';
       setTimeout(() => {
         success.style.display = 'none';
         form.style.display    = 'block';
         form.style.opacity    = '0';
-        requestAnimationFrame(() => form.style.opacity = '1');
+        requestAnimationFrame(() => { form.style.transition = 'opacity 0.35s ease'; form.style.opacity = '1'; });
         ['fname','femail','fsubject','fmessage'].forEach(id => {
           const el = document.getElementById(id);
-          el.value = ''; el.classList.remove('field-error');
+          el.value = '';
+          el.classList.remove('field-error');
         });
+        sendBtn.disabled    = false;
+        sendBtn.textContent = 'Send Message ✦';
+        document.getElementById('formStatus').className = 'form-status';
       }, 250);
     }
   </script>
