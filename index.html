@@ -3,162 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>John Kirby G. Soliven | Developer Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>John Kirby Soliven | Portfolio</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS (scroll animations) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Custom styles -->
+  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 
-  <!-- CUSTOM CURSOR -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-
   <!-- NAVBAR -->
-  <header class="navbar" id="navbar">
-    <a href="index.html" class="logo">JK<span>.</span></a>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="techstack.html">Tech Stack</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="nav-toggle" id="navToggle">
-      <span></span><span></span><span></span>
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand fw-black" href="index.html">JK<span class="text-accent">.</span></a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-1">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="techstack.html">Tech Stack</a></li>
+          <li class="nav-item"><a class="nav-link" href="certifications.html">Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
-    <!-- STAR PARTICLES -->
-    <div class="stars" id="stars"></div>
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center min-vh-100 py-5">
 
-    <div class="hero-container">
-      <div class="hero-text">
-        <p class="hero-tag">BSIT Student · Learning Web Dev</p>
-        <h1>Hi, I'm <br><span class="name-gradient">John Kirby</span></h1>
-        <p class="hero-sub">2nd year BSIT student from the Philippines, figuring out web development.</p>
-        <div class="hero-actions">
-          <a href="about.html" class="btn btn-primary">About Me</a>
-          <a href="certifications.html" class="btn btn-ghost">View Certs →</a>
+        <!-- Text -->
+        <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
+          <p class="hero-tag">BSIT Student · Learning Web Dev</p>
+          <h1 class="display-2 fw-black mb-3">
+            Hi, I'm<br>
+            <span class="text-outline">John Kirby</span>
+          </h1>
+          <p class="lead mb-4 text-muted">
+            2nd year BSIT student from the Philippines, figuring out web development one project at a time.
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="about.html" class="btn btn-dark btn-lg px-4">About Me</a>
+            <a href="certifications.html" class="btn btn-outline-dark btn-lg px-4">View Certs →</a>
+          </div>
+
+          <!-- Stats -->
+          <div class="row g-0 mt-5 border-top pt-4">
+            <div class="col-4 text-center">
+              <div class="fs-2 fw-black">8+</div>
+              <small class="text-muted text-uppercase letter-spacing">Topics</small>
+            </div>
+            <div class="col-4 text-center border-start border-end">
+              <div class="fs-2 fw-black">2nd</div>
+              <small class="text-muted text-uppercase letter-spacing">Year BSIT</small>
+            </div>
+            <div class="col-4 text-center">
+              <div class="fs-2 fw-black">∞</div>
+              <small class="text-muted text-uppercase letter-spacing">Curiosity</small>
+            </div>
+          </div>
         </div>
-        <div class="hero-stats">
-          <div class="stat"><span>8+</span><p>Topics Learned</p></div>
-          <div class="stat-divider"></div>
-          <div class="stat"><span>2nd</span><p>Year BSIT</p></div>
-          <div class="stat-divider"></div>
-          <div class="stat"><span>∞</span><p>Curiosity</p></div>
+
+        <!-- Photo -->
+        <div class="col-lg-5 offset-lg-1 order-1 order-lg-2 text-center mb-5 mb-lg-0" data-aos="fade-left">
+          <img src="images/profile.png" alt="John Kirby Soliven" class="hero-photo mb-4">
+          <!-- Skill tags row — works on all screen sizes, easy to add more -->
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag outline">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag outline">Git</span>
+            <span class="skill-tag">Bootstrap</span>
+            <span class="skill-tag outline">Tailwind</span>
+          </div>
         </div>
+
       </div>
-
-      <div class="hero-image">
-        <div class="image-frame">
-          <img src="images/profile.png" alt="John Kirby G. Soliven">
-          <div class="image-ring"></div>
-          <div class="image-ring ring-2"></div>
-          <div class="image-ring ring-3"></div>
-        </div>
-        <div class="float-badge badge-html">HTML</div>
-        <div class="float-badge badge-css">CSS</div>
-        <div class="float-badge badge-js">JS</div>
-      </div>
-    </div>
-
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- LEARNING CHAPTERS -->
-  <section class="chapters" id="journey">
-    <div class="section-header">
-      <p class="section-tag">— My Learning Path</p>
-      <h2>What I've Been Learning</h2>
-      <p class="section-sub">Here's what I've picked up so far.</p>
-    </div>
+  <!-- WHAT I'VE BEEN LEARNING -->
+  <section class="py-6 bg-light">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <small class="text-muted text-uppercase letter-spacing">— My Learning Path</small>
+        <h2 class="display-5 fw-black mt-2">What I've Been Learning</h2>
+        <p class="text-muted">Started from scratch, still going. Here's what I've picked up so far.</p>
+      </div>
 
-    <div class="chapter-grid">
-      <div class="card" style="--delay:0.05s">
-        <div class="card-icon">⚡</div>
-        <h3>VS Code</h3>
-        <p>Developer environment, extensions, and productivity workflows.</p>
-        <span class="card-tag">Tools</span>
-      </div>
-      <div class="card" style="--delay:0.1s">
-        <div class="card-icon">🌿</div>
-        <h3>Git & GitHub</h3>
-        <p>Version control, branching, collaboration, and deployment.</p>
-        <span class="card-tag">DevOps</span>
-      </div>
-      <div class="card" style="--delay:0.15s">
-        <div class="card-icon">🏗️</div>
-        <h3>HTML</h3>
-        <p>Semantic structure, accessibility, and modern markup patterns.</p>
-        <span class="card-tag">Foundation</span>
-      </div>
-      <div class="card" style="--delay:0.2s">
-        <div class="card-icon">🎨</div>
-        <h3>CSS</h3>
-        <p>Styling, animations, custom properties, and design systems.</p>
-        <span class="card-tag">Styling</span>
-      </div>
-      <div class="card" style="--delay:0.25s">
-        <div class="card-icon">📐</div>
-        <h3>Layouts</h3>
-        <p>Flexbox and Grid for powerful, responsive page structures.</p>
-        <span class="card-tag">Layout</span>
-      </div>
-      <div class="card" style="--delay:0.3s">
-        <div class="card-icon">📱</div>
-        <h3>Responsive Design</h3>
-        <p>Mobile-first approach and media queries for all screen sizes.</p>
-        <span class="card-tag">Design</span>
-      </div>
-      <div class="card" style="--delay:0.35s">
-        <div class="card-icon">🌬️</div>
-        <h3>Tailwind & DaisyUI</h3>
-        <p>Utility-first CSS frameworks for rapid, beautiful UI development.</p>
-        <span class="card-tag">Framework</span>
-      </div>
-      <div class="card" style="--delay:0.4s">
-        <div class="card-icon">📝</div>
-        <h3>Forms</h3>
-        <p>Interactive, validated, and accessible web form experiences.</p>
-        <span class="card-tag">Interaction</span>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">⚡</div>
+              <h5 class="fw-bold">VS Code</h5>
+              <p class="text-muted small mb-3">Developer environment, extensions, and productivity workflows.</p>
+              <span class="badge bg-dark">Tools</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">🌿</div>
+              <h5 class="fw-bold">Git & GitHub</h5>
+              <p class="text-muted small mb-3">Version control, branching, collaboration, and deployment.</p>
+              <span class="badge bg-dark">DevOps</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">🏗️</div>
+              <h5 class="fw-bold">HTML</h5>
+              <p class="text-muted small mb-3">Semantic structure, accessibility, and modern markup patterns.</p>
+              <span class="badge bg-dark">Foundation</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">🎨</div>
+              <h5 class="fw-bold">CSS</h5>
+              <p class="text-muted small mb-3">Styling, animations, custom properties, and design systems.</p>
+              <span class="badge bg-dark">Styling</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">📐</div>
+              <h5 class="fw-bold">Layouts</h5>
+              <p class="text-muted small mb-3">Flexbox and Grid for powerful, responsive page structures.</p>
+              <span class="badge bg-dark">Layout</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">📱</div>
+              <h5 class="fw-bold">Responsive Design</h5>
+              <p class="text-muted small mb-3">Mobile-first approach and media queries for all screen sizes.</p>
+              <span class="badge bg-dark">Design</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">🌬️</div>
+              <h5 class="fw-bold">Tailwind & DaisyUI</h5>
+              <p class="text-muted small mb-3">Utility-first CSS frameworks for rapid UI development.</p>
+              <span class="badge bg-dark">Framework</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card h-100 border learning-card">
+            <div class="card-body">
+              <div class="fs-2 mb-2">📝</div>
+              <h5 class="fw-bold">Forms</h5>
+              <p class="text-muted small mb-3">Interactive, validated, and accessible web form experiences.</p>
+              <span class="badge bg-dark">Interaction</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta">
-    <div class="cta-glass">
-      <div class="cta-orb"></div>
-      <p class="section-tag">— Open to Opportunities</p>
-      <h2>Open to <span>Collabs & Opportunities</span></h2>
-      <p>I'm actively looking for internships, projects, and collaborations. Always down to connect.</p>
-      <a href="contact.html" class="btn btn-primary">Contact Me ↗</a>
+  <section class="py-6 bg-dark text-white text-center" data-aos="fade-up">
+    <div class="container">
+      <small class="text-uppercase letter-spacing text-secondary">— Open to Opportunities</small>
+      <h2 class="display-5 fw-black mt-2 mb-3">Open to Collabs &amp; Opportunities</h2>
+      <p class="text-secondary mb-4">If you have a project, an internship, or just want to talk tech — I'm always down to connect.</p>
+      <a href="contact.html" class="btn btn-light btn-lg px-5">Contact Me →</a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <span class="logo">JK<span>.</span></span>
-      <p>© 2026 John Kirby G. Soliven — Crafted with passion.</p>
-      <div class="footer-links">
-        <a href="https://github.com/SuTanMon" target="_blank">GitHub</a>
-        <a href="https://www.credly.com/users/john-kirby-soliven/badges" target="_blank">Credly</a>
+  <footer class="py-4 border-top">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <span class="fw-black fs-5">JK<span class="text-accent">.</span></span>
+        <p class="mb-0 text-muted small">© 2026 John Kirby Soliven — Crafted with passion.</p>
+        <div class="d-flex gap-3">
+          <a href="https://github.com/SuTanMon" target="_blank" class="text-muted text-decoration-none small">GitHub</a>
+          <a href="https://www.credly.com/users/john-kirby-soliven/badges" target="_blank" class="text-muted text-decoration-none small">Credly</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Custom JS -->
   <script src="main.js"></script>
+
+  <!-- Back to top button -->
+  <button id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
 </body>
 </html>
