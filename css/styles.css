@@ -2,7 +2,9 @@
    JOHN KIRBY SOLIVEN — Portfolio Styles
    Bootstrap 5 + AOS + Warm Cream Theme
    ============================================ */
+
 html { scroll-behavior: smooth; }
+
 /* ── FONTS ── */
 body {
   font-family: 'DM Sans', sans-serif;
@@ -27,6 +29,11 @@ h1, h2, h3, h4, h5, .navbar-brand {
 #mainNav {
   background: #FAF8F5;
   border-bottom: 1px solid #E8E4DE;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
 }
 #mainNav .navbar-brand { font-size: 1.5rem; color: #111; }
 #mainNav .nav-link {
@@ -37,6 +44,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border-radius: 20px;
   transition: all 0.2s;
 }
+
 #mainNav .nav-link:hover,
 #mainNav .nav-link.active { color: #111; background: #F0EDE8; }
 
@@ -77,30 +85,16 @@ h1, h2, h3, h4, h5, .navbar-brand {
   filter: grayscale(15%);
 }
 
-/* Floating badges around the photo */
-.badge-float {
-  position: absolute;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border: 2px solid #111;
-  background: #FAF8F5;
-  color: #111;
-}
-.badge-html { top: 10px;    right: -10px; }
-.badge-css  { bottom: 60px; right: -20px; }
-.badge-js   { bottom: 20px; left: -10px;  }
-
 /* ── LEARNING CARDS ── */
 .learning-card {
   background: #FAF8F5;
   border-radius: 12px !important;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .learning-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* ── PAGE HERO (inner pages) ── */
@@ -110,6 +104,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
   padding: 100px 0 60px;
   text-align: center;
 }
+
 .page-hero small { color: #888; }
 .page-hero h1    { color: #fff; }
 
@@ -123,6 +118,7 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border: 3px solid #111;
   filter: grayscale(15%);
 }
+
 .info-list .list-group-item {
   border-left: 3px solid #111;
   border-right: none;
@@ -131,12 +127,14 @@ h1, h2, h3, h4, h5, .navbar-brand {
   padding: 12px 16px;
   background: transparent;
 }
+
 .value-card {
   background: #FAF8F5;
   border-left: 4px solid #111 !important;
   border-radius: 8px !important;
   transition: background 0.2s;
 }
+
 .value-card:hover { background: #F0EDE8 !important; }
 
 /* ── TECH STACK ── */
@@ -145,10 +143,12 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border-radius: 12px !important;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .tech-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
 }
+
 .tech-icon-box {
   width: 48px;
   height: 48px;
@@ -159,7 +159,18 @@ h1, h2, h3, h4, h5, .navbar-brand {
   justify-content: center;
   flex-shrink: 0;
 }
+
 .tech-icon-box svg { width: 26px; height: 26px; }
+
+/* Emoji icon inside tech-icon-box */
+.tech-icon-box .icon-emoji {
+  font-size: 1.4rem;
+}
+
+/* Soon badge on tech cards */
+.badge-soon {
+  font-size: 0.6rem;
+}
 
 /* ── CERTIFICATIONS ── */
 .cert-card {
@@ -168,10 +179,12 @@ h1, h2, h3, h4, h5, .navbar-brand {
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .cert-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
 }
+
 .cert-img-wrap {
   background: #F0EDE8;
   padding: 32px;
@@ -179,12 +192,14 @@ h1, h2, h3, h4, h5, .navbar-brand {
   cursor: zoom-in;
   border-bottom: 1px solid #E8E4DE;
 }
+
 .cert-img-wrap img {
   max-width: 140px;
   max-height: 140px;
   object-fit: contain;
   transition: transform 0.3s;
 }
+
 .cert-card:hover .cert-img-wrap img { transform: scale(1.06); }
 
 /* ── LIGHTBOX ── */
@@ -192,14 +207,16 @@ h1, h2, h3, h4, h5, .navbar-brand {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 9999;
   align-items: center;
   justify-content: center;
   padding: 24px;
   cursor: zoom-out;
 }
+
 #lightbox.show { display: flex; }
+
 #lightbox img {
   max-width: 90vw;
   max-height: 85vh;
@@ -207,18 +224,20 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border-radius: 8px;
   animation: zoomIn 0.2s ease;
 }
+
 @keyframes zoomIn {
   from { opacity: 0; transform: scale(0.9); }
   to   { opacity: 1; transform: scale(1); }
 }
+
 #lightbox-close {
   position: fixed;
   top: 20px;
   right: 24px;
   width: 40px;
   height: 40px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   color: #fff;
   font-size: 1.1rem;
@@ -228,7 +247,8 @@ h1, h2, h3, h4, h5, .navbar-brand {
   cursor: pointer;
   z-index: 10000;
 }
-#lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+#lightbox-close:hover { background: rgba(255, 255, 255, 0.3); }
 
 /* ── CONTACT ── */
 .contact-form-card {
@@ -237,15 +257,18 @@ h1, h2, h3, h4, h5, .navbar-brand {
   border: 1px solid #E8E4DE;
   padding: 36px;
 }
+
 .contact-link-card {
   background: #FAF8F5;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .contact-link-card:hover {
   transform: translateX(4px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.07) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07) !important;
   border-color: #111 !important;
 }
+
 .contact-icon-box {
   width: 42px;
   height: 42px;
@@ -256,6 +279,13 @@ h1, h2, h3, h4, h5, .navbar-brand {
   justify-content: center;
   flex-shrink: 0;
 }
+
+/* Availability text color */
+.avail-text { color: #16a34a; }
+
+/* Social link sub-text */
+.contact-sub-text { font-size: 0.78rem; }
+
 /* Pulsing green dot — shows you're open to work */
 .avail-dot {
   width: 8px;
@@ -265,32 +295,22 @@ h1, h2, h3, h4, h5, .navbar-brand {
   animation: pulse-dot 2s ease-in-out infinite;
   flex-shrink: 0;
 }
+
 @keyframes pulse-dot {
   0%, 100% { box-shadow: 0 0 4px #22c55e; }
   50%       { box-shadow: 0 0 10px #22c55e; }
 }
 
+/* Contact form — match focus ring to dark theme */
+.form-control:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.1);
+}
+
 /* ── FOOTER ── */
 footer { background: #FAF8F5; }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 991px) {
-  .hero-photo { width: 240px; height: 240px; }
-}
-@media (max-width: 768px) {
-  .hero-photo        { width: 200px; height: 200px; }
-  .text-outline      { -webkit-text-stroke: 1.5px #111; }
-  .badge-float       { display: none; }
-  .contact-form-card { padding: 24px 16px; }
-  .page-hero         { padding: 80px 0 40px; }
-}
-@media (max-width: 400px) {
-  .hero-photo  { width: 160px; height: 160px; }
-  h1.display-2 { font-size: 2rem; }
-}
-
 /* ── SKILL TAGS (hero section, below photo) ── */
-/* Two styles: filled (dark) and outline */
 .skill-tag {
   display: inline-block;
   padding: 6px 16px;
@@ -308,13 +328,7 @@ footer { background: #FAF8F5; }
   color: #111;
 }
 
-/* Contact form — match focus ring to dark theme */
-.form-control:focus {
-  border-color: #111;
-  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.1);
-}
-
-/* Back to top button */
+/* ── BACK TO TOP BUTTON ── */
 #backToTop {
   position: fixed;
   bottom: 28px;
@@ -330,4 +344,21 @@ footer { background: #FAF8F5; }
   display: none;
   z-index: 999;
   transition: opacity 0.2s;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 991px) {
+  .hero-photo { width: 240px; height: 240px; }
+}
+
+@media (max-width: 768px) {
+  .hero-photo        { width: 200px; height: 200px; }
+  .text-outline      { -webkit-text-stroke: 1.5px #111; }
+  .contact-form-card { padding: 24px 16px; }
+  .page-hero         { padding: 80px 0 40px; }
+}
+
+@media (max-width: 400px) {
+  .hero-photo  { width: 160px; height: 160px; }
+  h1.display-2 { font-size: 2rem; }
 }
